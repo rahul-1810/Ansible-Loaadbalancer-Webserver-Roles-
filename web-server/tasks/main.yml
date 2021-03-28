@@ -1,0 +1,22 @@
+---
+# tasks file for web-server
+- name: "Installing HTTPD"
+  package:
+          name: "httpd"
+          state: present
+
+- name: "Installing PHP"
+  package:
+          name: "php"
+          state: present
+
+- name: "Copying the webpage"
+  copy:
+          src: "/ifconfig.php"
+          dest: "/var/www/html"
+  notify: Restart service
+
+- name: "Starting HTTPD service"
+  service:
+          name: "httpd"
+          state: started 
